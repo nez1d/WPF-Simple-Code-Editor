@@ -1,0 +1,209 @@
+﻿<Window x:Class="CodeEditor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CodeEditor"
+        mc:Ignorable="d"
+        Title="Code Editor" Height="450" Width="800"
+        MinWidth="200" MinHeight="200" 
+        Background="#000">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+
+        <GridSplitter Grid.Row="1" Grid.RowSpan="2" Width="5" Background="Transparent"
+            HorizontalAlignment="Right" VerticalAlignment="Stretch" />
+
+        <GridSplitter Grid.Row="2" Grid.Column="1" Height="5" Background="Transparent"
+            HorizontalAlignment="Stretch" VerticalAlignment="Top" />
+
+        <Grid Grid.ColumnSpan="2">
+            <Menu x:Name="TopMenu" Style="{StaticResource TopMenu}">
+                <MenuItem x:Name="MenuFile" Style="{StaticResource MenuButton}" Margin="5" Header="File" >
+                    <MenuItem x:Name="MenuFile__NewTextFile" Style="{StaticResource MenuButton}" Header="New Text File..."></MenuItem>
+                    <MenuItem x:Name="MenuFile__NewFile" Style="{StaticResource MenuButton}" Header="New File"></MenuItem>
+                    <MenuItem x:Name="MenuFile__NewWindow" Style="{StaticResource MenuButton}" Header="New Window"></MenuItem>
+
+                    <MenuItem x:Name="MenuFile__OpenFile" Style="{StaticResource MenuButton}" Header="Open File">
+                    </MenuItem>
+                    <MenuItem x:Name="MenuFile__OpenWindow" Style="{StaticResource MenuButton}" Header="Open Window"></MenuItem>
+
+                    <MenuItem x:Name="MenuFile__Save" Style="{StaticResource MenuButton}" Header="Save"></MenuItem>
+                    <MenuItem x:Name="MenuFile__SaveAs" Style="{StaticResource MenuButton}" Header="Save As..."></MenuItem>
+                    <MenuItem x:Name="MenuFIle__SaveAll" Style="{StaticResource MenuButton}" Header="Save All"></MenuItem>
+
+                    <MenuItem x:Name="MenuFile__AutoSage" Style="{StaticResource MenuButton}" Header="Auto Save"></MenuItem>
+
+                    <MenuItem x:Name="MenuFile__Preferences" Style="{StaticResource MenuButton}" Header="Preferences">
+                        <MenuItem x:Name="MenuFile__Preferences__Profile" Style="{StaticResource MenuButton}" Header="Profile(Default)"></MenuItem>
+                        <MenuItem x:Name="MenuFile__Preferences__Settings" Style="{StaticResource MenuButton}" Header="Settings"></MenuItem>
+                        <MenuItem x:Name="MenuFile__Preferences__Extensions" Style="{StaticResource MenuButton}" Header="Extensions"></MenuItem>
+                        <MenuItem x:Name="MenuFile__Preferences__KeyboardShortcuts" Style="{StaticResource MenuButton}" Header="Keyboard Shortcuts"></MenuItem>
+                        <MenuItem x:Name="MenuFile__Preferences__" Style="{StaticResource MenuButton}" Header="Configure Snippents"></MenuItem>
+                        <MenuItem x:Name="MenuFile__Preferences__ConfigureSnippents" Style="{StaticResource MenuButton}" Header="Tasks"></MenuItem>
+                        <MenuItem x:Name="MenuFile__Preferences__Theme" Style="{StaticResource MenuButton}" Header="Theme">
+                            <MenuItem x:Name="MenuFile__Preferences__ThemeWhite" Style="{StaticResource MenuButton}" Header="White Theme"></MenuItem>
+                            <MenuItem x:Name="MenuFile__Preferences__ThemeDark" Style="{StaticResource MenuButton}" Header="Dark Theme"></MenuItem>
+                            <MenuItem x:Name="MenuFile__Preferences__ThemeBalance" Style="{StaticResource MenuButton}" Header="Balance Theme"></MenuItem>
+                        </MenuItem>
+                    </MenuItem>
+
+                    <MenuItem x:Name="MenuFile__Exit" Style="{StaticResource MenuButton}" Header="Exit"></MenuItem>
+                </MenuItem>
+
+                <MenuItem x:Name="MenuEdit" Style="{StaticResource MenuButton}" Margin="5" Header="Edit" >
+                    <MenuItem x:Name="MenuEdit__Edit" Style="{StaticResource MenuButton}" Header="Edit"></MenuItem>
+                    <MenuItem x:Name="MenuEdit__Cut" Style="{StaticResource MenuButton}" Header="Cut"></MenuItem>
+                    <MenuItem x:Name="MenuEdit__Paste" Style="{StaticResource MenuButton}" Header="Paste"></MenuItem>
+
+                    <MenuItem x:Name="MenuEdit__FindInFiles" Style="{StaticResource MenuButton}" Header="Find in Files"></MenuItem>
+                    <MenuItem x:Name="MenuEdit__ReplaceInFiles" Style="{StaticResource MenuButton}" Header="Replace in Files"></MenuItem>
+
+                    <MenuItem x:Name="MenuEdit__Find" Style="{StaticResource MenuButton}" Header="Find"></MenuItem>
+                    <MenuItem x:Name="MenuEdit__Replace" Style="{StaticResource MenuButton}" Header="Replace"></MenuItem>
+                </MenuItem>
+
+                <MenuItem x:Name="MenuSelection" Style="{StaticResource MenuButton}" Margin="5" Header="Selection" >
+                    <MenuItem x:Name="MenuSelection__SelecAll" Style="{StaticResource MenuButton}" Header="Select All"></MenuItem>
+                    <MenuItem x:Name="MenuSelection__ExpandSelection" Style="{StaticResource MenuButton}" Header="Expand Selection"></MenuItem>
+                    <MenuItem x:Name="MenuSelection__ShinkSelection" Style="{StaticResource MenuButton}" Header="Shink Selection"></MenuItem>
+
+                    <MenuItem x:Name="MenuSelection__CopyLineUp" Style="{StaticResource MenuButton}" Header="Copy Line Up"></MenuItem>
+                    <MenuItem x:Name="MenuSelection__CopyLineDown" Style="{StaticResource MenuButton}" Header="Copy Line Down"></MenuItem>
+                    <MenuItem x:Name="MenuSelection__MoveLineUp" Style="{StaticResource MenuButton}" Header="Move Line up"></MenuItem>
+                    <MenuItem x:Name="MenuSelection__MoveLineDown" Style="{StaticResource MenuButton}" Header="Move Line Down"></MenuItem>
+                    <MenuItem x:Name="MenuSelection__DublicateSelection" Style="{StaticResource MenuButton}" Header="Dublicate Selection"></MenuItem>
+
+                    <MenuItem x:Name="MenuSelection__AddCursorAbove" Style="{StaticResource MenuButton}" Header="Add Cursor Above"></MenuItem>
+                    <MenuItem x:Name="MenuSelection__AddCursorBelow" Style="{StaticResource MenuButton}" Header="Add Cursor Below"></MenuItem>
+                    <MenuItem x:Name="MenuSelection__AddCursorToLineEnds" Style="{StaticResource MenuButton}" Header="Add Cursor to Line Ends"></MenuItem>
+                    <MenuItem x:Name="MenuSelection__AddAddNextOccurrentce" Style="{StaticResource MenuButton}" Header="Add Next Occurrentce"></MenuItem>
+                    <MenuItem x:Name="MenuSelection__AddAddPreviousOccurrentce" Style="{StaticResource MenuButton}" Header="Add Previous Occurrentce"></MenuItem>
+                    <MenuItem x:Name="MenuSelection__SelectAllOccurrentces" Style="{StaticResource MenuButton}" Header="Select All Occurrentces"></MenuItem>
+                </MenuItem>
+
+                <MenuItem x:Name="MenuView" Style="{StaticResource MenuButton}" Margin="5" Header="View" >
+                    <MenuItem x:Name="MenuView__OpenView" Style="{StaticResource MenuButton}" Header="Open View..."></MenuItem>
+
+                    <MenuItem x:Name="MenuView__Appearance" Style="{StaticResource MenuButton}" Header="Appearance">
+                        <MenuItem x:Name="MenuView__Appearance__FullScreen" Style="{StaticResource MenuButton}" Header="Full Screen"></MenuItem>
+                        <MenuItem x:Name="MenuView__Appearance__ZenMode" Style="{StaticResource MenuButton}" Header="Zen Mode"></MenuItem>
+                        <MenuItem x:Name="MenuView__Appearance__CenteredLayout" Style="{StaticResource MenuButton}" Header="Centered Layout"></MenuItem>
+
+                        <MenuItem x:Name="MenuView__Appearance__MenuBar" Style="{StaticResource MenuButton}" Header="Menu Bar"></MenuItem>
+                        <MenuItem x:Name="MenuView__Appearance__PrimatySideBar" Style="{StaticResource MenuButton}" Header="Primary Side Bar"></MenuItem>
+                        <MenuItem x:Name="MenuView__Appearance__SecondarySideBar" Style="{StaticResource MenuButton}" Header="Secondary Side Bar"></MenuItem>
+                        <MenuItem x:Name="MenuView__Appearance__StatusBar" Style="{StaticResource MenuButton}" Header="Status Bar"></MenuItem>
+                        <MenuItem x:Name="MenuView__Appearance__Panel" Style="{StaticResource MenuButton}" Header="Panel"></MenuItem>
+
+                        <MenuItem x:Name="MenuView__Appearance__Minimap" Style="{StaticResource MenuButton}" Header="Minimap"></MenuItem>
+                        <MenuItem x:Name="MenuView__Appearance__ZoomIn" Style="{StaticResource MenuButton}" Header="Zoom In"></MenuItem>
+                        <MenuItem x:Name="MenuView__Appearance__ZoomOut" Style="{StaticResource MenuButton}" Header="Zoom Out"></MenuItem>
+                        <MenuItem x:Name="MenuView__Appearance__ResetZoom" Style="{StaticResource MenuButton}" Header="Reset Zoom"></MenuItem>
+                    </MenuItem>
+                    <MenuItem x:Name="MenuView__EditorLayout" Style="{StaticResource MenuButton}" Header="Editor Layout">
+                        <MenuItem x:Name="MenuView__EditorLayout__SplitUp" Style="{StaticResource MenuButton}" Header="Split Up"></MenuItem>
+                        <MenuItem x:Name="MenuView__EditorLayout__SplitDown" Style="{StaticResource MenuButton}" Header="Split Down"></MenuItem>
+                        <MenuItem x:Name="MenuView__EditorLayout__SplitLeft" Style="{StaticResource MenuButton}" Header="Split Left"></MenuItem>
+                        <MenuItem x:Name="MenuView__EditorLayout__SplitRight" Style="{StaticResource MenuButton}" Header="Split Right"></MenuItem>
+
+                        <MenuItem x:Name="MenuView__EditorLayout__SplitInGroup" Style="{StaticResource MenuButton}" Header="Split in Group"></MenuItem>
+
+                        <MenuItem x:Name="MenuView__EditorLayout__Single" Style="{StaticResource MenuButton}" Header="Single"></MenuItem>
+                        <MenuItem x:Name="MenuView__EditorLayout__TwoColumns" Style="{StaticResource MenuButton}" Header="Two Columns"></MenuItem>
+                        <MenuItem x:Name="MenuView__EditorLayout__ThreeColumns" Style="{StaticResource MenuButton}" Header="Three Columns"></MenuItem>
+                        <MenuItem x:Name="MenuView__EditorLayout__TwoRows" Style="{StaticResource MenuButton}" Header="Two Rows"></MenuItem>
+                        <MenuItem x:Name="MenuView__EditorLayout__ThreeRows" Style="{StaticResource MenuButton}" Header="Three Rows"></MenuItem>
+                        <MenuItem x:Name="MenuView__EditorLayout__Grid2x2" Style="{StaticResource MenuButton}" Header="Grid (2x2)"></MenuItem>
+                        <MenuItem x:Name="MenuView__EditorLayout__TwoRowsRight" Style="{StaticResource MenuButton}" Header="Two Rows Right"></MenuItem>
+                        <MenuItem x:Name="MenuView__EditorLayout__TwoColumnsBottom" Style="{StaticResource MenuButton}" Header="Two Columns Bottom"></MenuItem>
+
+                        <MenuItem x:Name="MenuView__EditorLayout__FlipLayout" Header="Flip Layout"></MenuItem>
+                    </MenuItem>
+
+                    <MenuItem Style="{StaticResource MenuButton}" Header="Explorer"></MenuItem>
+                    <MenuItem Style="{StaticResource MenuButton}" Header="Search"></MenuItem>
+                    <MenuItem Style="{StaticResource MenuButton}" Header="Source Control"></MenuItem>
+                    <MenuItem Style="{StaticResource MenuButton}" Header="Run"></MenuItem>
+                    <MenuItem Style="{StaticResource MenuButton}" Header="Extensions"></MenuItem>
+
+                    <MenuItem Style="{StaticResource MenuButton}" Header="Problems"></MenuItem>
+                    <MenuItem Style="{StaticResource MenuButton}" Header="Output"></MenuItem>
+                    <MenuItem Style="{StaticResource MenuButton}" Header="Debug Console"></MenuItem>
+                    <MenuItem Style="{StaticResource MenuButton}" Header="Terminal"></MenuItem>
+
+                    <MenuItem Header="Word Warp"></MenuItem>
+                </MenuItem>
+
+                <MenuItem x:Name="MenuTerminal" Style="{StaticResource MenuButton}" Margin="5" Header="Terminal" >
+                    <MenuItem x:Name="MenuTerminal__NewTerminal" Style="{StaticResource MenuButton}" Header="New Terminal"></MenuItem>
+                    <MenuItem x:Name="MenuTerminal__SplitTerminal" Style="{StaticResource MenuButton}" Header="Split Terminal"></MenuItem>
+
+                    <MenuItem x:Name="MenuTerminal__RunTask" Style="{StaticResource MenuButton}" Header="Run Task..."></MenuItem>
+                    <MenuItem x:Name="MenuTerminal__RunBuildTask" Style="{StaticResource MenuButton}" Header="Run Build Task..."></MenuItem>
+                    <MenuItem x:Name="MenuTerminal__RunActiveFile" Style="{StaticResource MenuButton}" Header="Run Active File"></MenuItem>
+                    <MenuItem x:Name="MenuTerminal__RunSelectedText" Style="{StaticResource MenuButton}" Header="Run Selected Text"></MenuItem>
+
+                    <MenuItem x:Name="MenuTerminal__ShowRunningTask" Style="{StaticResource MenuButton}" Header="Show Running Task..."></MenuItem>
+                    <MenuItem x:Name="MenuTerminal__RestartRunningTask" Style="{StaticResource MenuButton}" Header="Restart Running Task..."></MenuItem>
+                    <MenuItem x:Name="MenuTerminal__TerminateTask" Style="{StaticResource MenuButton}" Header="Terminate Task..."></MenuItem>
+
+                    <MenuItem x:Name="MenuTerminal__ConfigureTask" Style="{StaticResource MenuButton}" Header="Configure Task..."></MenuItem>
+                    <MenuItem x:Name="MenuTerminal__ConfigureDefaultBuildTask" Style="{StaticResource MenuButton}" Header="Configure Default Build Task..."></MenuItem>
+                </MenuItem>
+
+                <MenuItem x:Name="MenuHelp" Style="{StaticResource MenuButton}" Margin="5" Header="Help" >
+                    <MenuItem x:Name="MenuHelp__Welcome" Style="{StaticResource MenuButton}" Header="Welcome"></MenuItem>
+                    <MenuItem x:Name="MenuHelp__ShowAllCommands" Style="{StaticResource MenuButton}" Header="Show All Commands"></MenuItem>
+                    <MenuItem x:Name="MenuHelp__Documentation" Style="{StaticResource MenuButton}" Header="Documentation"></MenuItem>
+                    <MenuItem x:Name="MenuHelp__EditorPlaygrond" Style="{StaticResource MenuButton}" Header="Editor Playgrond"></MenuItem>
+                    <MenuItem x:Name="MenuHelp__ShowReleaseNotes" Style="{StaticResource MenuButton}" Header="Show Release Notes"></MenuItem>
+
+                    <MenuItem x:Name="MenuHelp__KeyboardShortcutsReference" Style="{StaticResource MenuButton}" Header="Keyboard Shortcuts Reference"></MenuItem>
+                    <MenuItem x:Name="MenuHelp__VideoTutorial" Style="{StaticResource MenuButton}" Header="Video Tutorial"></MenuItem>
+                    <MenuItem x:Name="MenuHelp__TipsAndTricks" Style="{StaticResource MenuButton}" Header="Tips and Tricks"></MenuItem>
+
+                    <MenuItem x:Name="MenuHelp__JoinUsOnYouTube" Style="{StaticResource MenuButton}" Header="Join Us on YouTube"></MenuItem>
+                    <MenuItem x:Name="MenuHelp__SearchFeatureRequest" Style="{StaticResource MenuButton}" Header="Search Feature Request"></MenuItem>
+                    <MenuItem x:Name="MenuHelp__ReportIssue" Style="{StaticResource MenuButton}" Header="Report Issue"></MenuItem>
+
+                    <MenuItem x:Name="MenuHelp__ViewLicense" Style="{StaticResource MenuButton}" Header="View License"></MenuItem>
+                    <MenuItem x:Name="MenuHelp__PrivacyStatement" Style="{StaticResource MenuButton}" Header="Privacy Statement"></MenuItem>
+
+                    <MenuItem x:Name="MenuHelp__ToggleDeveloperTools" Style="{StaticResource MenuButton}" Header="Toggle Developer Tools"></MenuItem>
+                    <MenuItem x:Name="MenuHelp__OpenProcessExplorer" Style="{StaticResource MenuButton}" Header="Open Process Explorer"></MenuItem>
+
+                    <MenuItem x:Name="MenuHelp__CheckforUpdates" Style="{StaticResource MenuButton}" Header="Check for Updates..."></MenuItem>
+
+                    <MenuItem x:Name="MenuHelp__About" Style="{StaticResource MenuButton}" Header="About"></MenuItem>
+                </MenuItem>
+            </Menu>
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.RowSpan="2">
+            <Border BorderBrush="#fff" BorderThickness="1" Background="#000" Margin="5 3 3 5">
+                
+            </Border>
+        </Grid>
+
+        <Grid Grid.Row="2" Grid.Column="1">
+            <Border BorderBrush="#fff" BorderThickness="1" Background="#000" Margin="3 3 5 5">
+
+            </Border>
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Border BorderBrush="#fff" BorderThickness="1" Background="#000" Margin="3 3 5 3">
+
+            </Border>
+        </Grid>
+    </Grid>
+</Window>
